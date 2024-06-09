@@ -1,39 +1,21 @@
 <template>
-  <el-menu :default-openeds="['1', '3']">
-    <el-submenu index="1">
-      <template slot="title"><i class="el-icon-message"></i>导航一</template>
-      <el-menu-item-group>
-        <template slot="title">组件</template>
-        <el-menu-item index="1-1">
-          <router-link to="/content/componenta">组件A</router-link>
-        </el-menu-item>
-        <el-menu-item index="1-2">
-          <router-link to="/content/componentb">组件B</router-link>
-        </el-menu-item>
-      </el-menu-item-group>
-      <el-menu-item-group title="分组2">
-        <el-menu-item index="1-3">选项3</el-menu-item>
-      </el-menu-item-group>
-      <el-submenu index="1-4">
-        <template slot="title">选项4</template>
-        <el-menu-item index="1-4-1">选项4-1</el-menu-item>
-      </el-submenu>
-    </el-submenu>
-    <el-submenu index="2">
-      <template slot="title"><i class="el-icon-menu"></i>导航二</template>
-      <el-menu-item-group>
-        <template slot="title">分组一</template>
-        <el-menu-item index="2-1">选项1</el-menu-item>
-      </el-menu-item-group>
-    </el-submenu>
-    <el-submenu index="3">
-      <template slot="title"><i class="el-icon-setting"></i>导航三</template>
-      <el-menu-item-group>
-        <template slot="title">分组一</template>
-        <el-menu-item index="3-1">选项1</el-menu-item>
-        <el-menu-item index="3-2">选项2</el-menu-item>
-      </el-menu-item-group>
-    </el-submenu>
+  <el-menu>
+    <el-menu-item>
+      <router-link to="/content/componenta">
+        添加业主
+      </router-link>
+    </el-menu-item>
+    <el-menu-item>
+      <router-link to="/content/componentb">
+        查询信息
+      </router-link>
+    </el-menu-item>
+    <el-menu-item>
+        更新信息
+    </el-menu-item>
+    <el-menu-item>
+        删除信息
+    </el-menu-item>
   </el-menu>
 </template>
 <script>
@@ -41,3 +23,8 @@
     name: 'Admin',
   }
 </script>
+<style>
+  .el-menu {
+    user-select: none;
+  }
+</style>

@@ -1,6 +1,8 @@
 <template>
-  <el-aside width="250px" style="background-color: rgb(238, 241, 246)">
+  <el-aside width="250px">
     <Admin v-if="form.identity=='管理员'"></Admin>
+    <Common v-if="form.identity=='普通业主'"></Common>
+    <Manager v-if="form.identity=='物业代表'"></Manager>
   </el-aside>
 </template>
 <script>

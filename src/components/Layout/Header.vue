@@ -18,6 +18,7 @@ export default {
     align-items: center;
     background-color: #409EFF;
     line-height: 100px;
+    user-select: none;
   }
   .header-title {
     font-size: 24px;
