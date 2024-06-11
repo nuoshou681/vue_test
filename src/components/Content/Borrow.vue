@@ -1,10 +1,10 @@
 <template>
     <div>
-        <p>这是组件B</p>
+        <p>这里是借阅信息</p>
     </div>
 </template>
 <script>
 export default {
-  name: 'ComponentB',
+  name: 'Borrow',
 }
 </script>

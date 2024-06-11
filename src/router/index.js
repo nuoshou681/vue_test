@@ -2,8 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '../views/Login.vue'
 import Content from '../views/Content.vue'
-import ComponentA from '@/components/Content/ComponentA.vue'
-import ComponentB from '@/components/Content/ComponentB.vue'
+import Books from '@/components/Content/Books.vue'
+import Borrow from '@/components/Content/Borrow.vue'
 import Home from '@/components/Content/Home.vue'
 Vue.use(Router)
 
@@ -30,14 +30,14 @@ export default new Router({
                     component: Home
                 },
                 {
-                    path: '/content/componenta',
-                    name: 'ComponentA',
-                    component: ComponentA
+                    path: '/content/books',
+                    name: 'Books',
+                    component: Books
                 },
                 {
-                    path: '/content/componentb',
-                    name: 'ComponentB',
-                    component: ComponentB
+                    path: '/content/borrow',
+                    name: 'Borrow',
+                    component: Borrow
                 }
             ]
         },

@@ -2,20 +2,19 @@
     <el-header>
       <span class="header-title">智慧微校园系统</span>
       <nav class="header-nav">
-        <span>{{ form.username }}</span>
+        <i class="el-icon-user"></i>
+        <!-- 将用户名渲染出来 -->
+        <span>{{ userInfo.username }}</span>
       </nav>
     </el-header>
   </template>
 <script>
 export default {
   name: 'Header',
-  data() {
-    return {
-      form: {
-        username: '李同学',
-        password: '',
-        identity: '' // 身份 管理员待定
-      }
+  computed: {
+    // 从vuex中获取用户信息
+    userInfo() {
+      return this.$store.state.userInfo
     }
   }
 }
@@ -32,6 +31,10 @@ export default {
   .header-title {
 
     margin-left: 15px;
+  }
+  .el-icon-user {
+    font-size: 20px;
+    margin-right: 10px;
   }
   .header-nav {
     margin-left: auto;

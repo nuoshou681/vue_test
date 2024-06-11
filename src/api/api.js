@@ -17,3 +17,11 @@ export function getTest() {
     method: 'get'
   });
 }
+
+// 图书信息
+export function getBooks() {
+  return request({
+    url: '/book/getAllBook',
+    method: 'get'
+  });
+}

@@ -6,6 +6,7 @@
                 <el-input v-model="form.username"></el-input>
             </el-form-item>
             <el-form-item label="密码">
+                <!-- 密码隐藏 -->
                 <el-input show-password v-model="form.password"></el-input>
             </el-form-item>
             <el-form-item>
@@ -16,12 +17,13 @@
     </div>
 </template>
 <script>
-    import axios from 'axios'
+    // 引入api接口
     import { login, getTest } from '@/api/api.js'
     export default {
         name: 'Login',
         data() {
             return {
+                // 表单数据
                 form: {
                     username: '',
                     password: '',
@@ -36,7 +38,7 @@
                         // 登录成功后的逻辑
                         if(reponse !== ''){
                             // 表单数据加入vuex
-                            this.$store.dispatch('SetLoginForm',this.form)
+                            this.$store.dispatch('SetUserInfo',reponse)
                             // 跳转到content页面
                             this.$router.push('/content')
                         }else{

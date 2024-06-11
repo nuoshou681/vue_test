@@ -1,17 +1,15 @@
 <template>
-  <div>
-    <p>{{ form }}</p>
     <el-main>
+      <p>{{ userInfo.username }}</p>
       <router-view></router-view>
     </el-main>
-  </div>
 </template>
 <script>
   export default {
     name: 'Main',
     computed: {
-      form() {
-        return this.$store.state.loginform
+      userInfo() {
+        return this.$store.state.userInfo
       }
     }
   }

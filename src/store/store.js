@@ -5,32 +5,27 @@ import Vuex from 'vuex'
 Vue.use(Vuex);
 
 // 创建store对象
+// state用于存储数据
+// mutations用于定义方法
+// actions用于定义异步方法
+
 const store = new Vuex.Store({
-    // state用于存储数据
-    state() {
-        return {
-            loginform: {
-                username: '',
-                password: '',
-                identity: ''
-            }
-        }
+    
+    state: {
+        userInfo: {}
     },
-    // mutations用于定义方法
+    
     mutations: {
-        // 修改loginform的值
-        LoginForm(state, loginform) {
-            state.loginform = loginform;
+        SetUserInfo(state, userInfo) {
+            state.userInfo = userInfo;
         }
     },
-    // actions用于定义异步方法
+    
     actions: {
-        // 修改loginform的值
-        SetLoginForm({ commit }, loginform) {
-            commit('LoginForm', loginform);
+        SetUserInfo({commit}, userInfo) {
+            commit('SetUserInfo', userInfo);
         }
     },
-    // getters用于获取数据
 });
 // 导出store对象
 export default store;

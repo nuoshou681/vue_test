@@ -2,13 +2,20 @@
   <el-aside width="250px" style="background-color:#FFFFFF">
     <el-menu :default-openeds="['2','3']">
       <el-menu-item-group>
-        <el-menu-item index="1-1"><i class="el-icon-house"></i>首页</el-menu-item>
+        <el-menu-item index="1-1">
+          <i class="el-icon-house"></i>
+          <router-link to="/content/home">首页</router-link>
+        </el-menu-item>
       </el-menu-item-group>
       <el-submenu index="2">
         <template slot="title"><i class="el-icon-reading"></i>图书管理</template>
         <el-menu-item-group title=" 图书">
-          <el-menu-item index="2-1">图书信息</el-menu-item>
-          <el-menu-item index="2-2">借阅信息</el-menu-item>
+          <el-menu-item index="2-1">
+            <router-link to="/content/books">图书信息</router-link>   
+          </el-menu-item>
+          <el-menu-item index="2-2">
+            <router-link to="/content/borrow">借阅信息</router-link>
+          </el-menu-item>
         </el-menu-item-group>
       </el-submenu>
       <el-submenu index="3">
