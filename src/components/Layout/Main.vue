@@ -19,7 +19,5 @@
 <style>
   .el-main {
     background-color: #FFFFFF;
-    text-align: center;
-    line-height: 100vh;
   }
 </style>

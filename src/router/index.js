@@ -4,6 +4,7 @@ import Login from '../views/Login.vue'
 import Content from '../views/Content.vue'
 import ComponentA from '@/components/Content/ComponentA.vue'
 import ComponentB from '@/components/Content/ComponentB.vue'
+import Home from '@/components/Content/Home.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -24,6 +25,11 @@ export default new Router({
             component: Content,
             children: [
                 {
+                    path: '/content/home',
+                    name: 'Home',
+                    component: Home
+                },
+                {
                     path: '/content/componenta',
                     name: 'ComponentA',
                     component: ComponentA
@@ -32,7 +38,7 @@ export default new Router({
                     path: '/content/componentb',
                     name: 'ComponentB',
                     component: ComponentB
-                },
+                }
             ]
         },
 

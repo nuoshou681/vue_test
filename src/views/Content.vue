@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <div>
     <el-container direction="vertical">
       <Header></Header>
       <el-container>
@@ -32,4 +32,5 @@ a:hover {
   text-decoration: none;
   color: inherit; /* 保持链接颜色与其父元素一致 */
 }
+
 </style>

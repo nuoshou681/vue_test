@@ -1,28 +1,23 @@
 <template>
     <div>
         <el-form ref="form" class="login-box" :model="form" label-width="100px">
-            <h3 class="login-title">物业管理系统</h3>
+            <h3 class="login-title">智慧微校园系统</h3>
             <el-form-item label="账户">
                 <el-input v-model="form.username"></el-input>
             </el-form-item>
             <el-form-item label="密码">
-                <el-input v-model="form.password"></el-input>
+                <el-input show-password v-model="form.password"></el-input>
             </el-form-item>
-            <el-form-item label="用户">
-                <el-radio-group v-model="form.identity" class="login-box-radio">
-                  <el-radio label="管理员"></el-radio>
-                  <el-radio label="普通业主"></el-radio>
-                  <el-radio label="物业代表"></el-radio>
-                </el-radio-group>
-              </el-form-item>
             <el-form-item>
                 <el-button style="margin-right: 50px;" type="primary" @click="onSubmit">登录</el-button>
-                <el-button>注册</el-button>
+                <el-button @click="register">测试</el-button>
             </el-form-item>
         </el-form>
     </div>
 </template>
 <script>
+    import axios from 'axios'
+    import { login, getTest } from '@/api/api.js'
     export default {
         name: 'Login',
         data() {
@@ -30,17 +25,43 @@
                 form: {
                     username: '',
                     password: '',
-                    identity: ''
                 }
             }
         },
         methods: {
             onSubmit() {
-                this.$store.dispatch('SetLoginForm',this.form)
-                this.$router.push('/content')
+                login(this.form).then(
+                    reponse => {
+                        console.log(reponse)
+                        // 登录成功后的逻辑
+                        if(reponse !== ''){
+                            // 表单数据加入vuex
+                            this.$store.dispatch('SetLoginForm',this.form)
+                            // 跳转到content页面
+                            this.$router.push('/content')
+                        }else{
+                            alert("登录失败")
+                        }
+                    }
+                ).catch(
+                    error => {
+                        console.log(error)
+                    }
+                )
+                // 清空表单
+                this.form.username = ''
+                this.form.password = ''
             },
-            register(){
-                alert('注册')
+            register() {
+                getTest().then(
+                    reponse => {
+                        console.log(reponse)
+                    }
+                ).catch(
+                    error => {
+                        console.log(error)
+                    }
+                )
             }
         }
     }
@@ -57,19 +78,10 @@
         border-radius: 5px;
         box-shadow: 0 0 10px #EBEEF5;
     }
+
     .login-title {
         margin-left: 140px;
         font-size: 20px;
         margin-bottom: 20px;
-    }
-    .login-box-radio {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        flex-direction: row;
-
-    }
-    .login-box-radio .el-radio {
-        margin-right: 11px;
     }
 </style>

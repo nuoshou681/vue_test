@@ -1,40 +1,39 @@
 <template>
     <el-header>
-      <span class="header-title">物业管理系统</span>
-      <!-- 这个地方实现点击折叠和展开, 使用vuex -->
-      <i class="el-icon-s-fold"></i>
+      <span class="header-title">智慧微校园系统</span>
       <nav class="header-nav">
+        <span>{{ form.username }}</span>
       </nav>
     </el-header>
   </template>
 <script>
 export default {
   name: 'Header',
+  data() {
+    return {
+      form: {
+        username: '李同学',
+        password: '',
+        identity: '' // 身份 管理员待定
+      }
+    }
+  }
 }
 </script>
 <style>
   .el-header {
+    user-select: none;
     display: flex;
     align-items: center;
     background-color: #409EFF;
-    line-height: 100px;
-    user-select: none;
+    font-size: 24px;
+    color: #fff;
   }
   .header-title {
-    font-size: 24px;
-    color: #fff;
-    margin-left: 20px;
-  }
-  .el-icon-s-fold {
-    font-size: 24px;
-    color: #fff;
-    margin-left: 50px;
+
+    margin-left: 15px;
   }
   .header-nav {
     margin-left: auto;
-  }
-  .header-nav a {
-    color: #fff;
-    margin: 0 10px;
   }
 </style>

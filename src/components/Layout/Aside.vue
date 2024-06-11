@@ -1,21 +1,32 @@
 <template>
-  <el-aside width="250px">
-    <Admin v-if="form.identity=='管理员'"></Admin>
-    <Common v-if="form.identity=='普通业主'"></Common>
-    <Manager v-if="form.identity=='物业代表'"></Manager>
+  <el-aside width="250px" style="background-color:#FFFFFF">
+    <el-menu :default-openeds="['2','3']">
+      <el-menu-item-group>
+        <el-menu-item index="1-1"><i class="el-icon-house"></i>首页</el-menu-item>
+      </el-menu-item-group>
+      <el-submenu index="2">
+        <template slot="title"><i class="el-icon-reading"></i>图书管理</template>
+        <el-menu-item-group title=" 图书">
+          <el-menu-item index="2-1">图书信息</el-menu-item>
+          <el-menu-item index="2-2">借阅信息</el-menu-item>
+        </el-menu-item-group>
+      </el-submenu>
+      <el-submenu index="3">
+        <template slot="title"><i class="el-icon-data-board"></i>选课管理</template>
+        <el-menu-item-group title=" 课程">
+          <el-menu-item index="3-1">课程信息</el-menu-item>
+          <el-menu-item index="3-2">选课信息</el-menu-item>
+        </el-menu-item-group>
+      </el-submenu>
+    </el-menu>
   </el-aside>
 </template>
 <script>
-  import Admin from '@/components/Aside/Admin.vue'
-  import Common from '@/components/Aside/Common.vue'
-  import Manager from '@/components/Aside/Manager.vue'
   export default {
     name: 'Header',
     components: {
-      Admin,
-      Common,
-      Manager
     },
+    // 计算属性拿到vuex中用户数据
     computed: {
       form() {
         return this.$store.state.loginform
@@ -25,6 +36,8 @@
 </script>
 <style>
   .el-aside {
-    text-align: center;
+    user-select: none;
+    background-color: #ECF5FF;
+    height: 89vh;
   }
 </style>
