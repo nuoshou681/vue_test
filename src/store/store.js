@@ -13,6 +13,7 @@ const store = new Vuex.Store({
     
     state: {
         userInfo: {},
+        // 借阅图书信息
         borrowedBooks: [],
         // 是否登录状态
         isLoginedIn: false,
@@ -27,10 +28,15 @@ const store = new Vuex.Store({
         SetBorrowedBooks(state, borrowedBooks) {
             state.borrowedBooks = borrowedBooks;
         },
+        // 清除借阅图书信息
+        ClearBorrowedBooks(state) {
+            state.borrowedBooks = [];
+        },
         // 登录状态
         SetLoginStatus(state, isLoginedIn) {
             state.isLoginedIn = isLoginedIn;
-        }
+        },
+        
     },
     
     actions: {
@@ -42,7 +48,10 @@ const store = new Vuex.Store({
         },
         SetLoginStatus({commit}, isLoginedIn) {
             commit('SetLoginStatus', isLoginedIn);
-        }
+        },
+        ClearBorrowedBooks({commit}) {
+            commit('ClearBorrowedBooks');
+        },
     },
 });
 // 导出store对象

@@ -25,3 +25,48 @@ export function getBooks() {
     method: 'get'
   });
 }
+
+// 按照条件搜索图书
+export function searchBook(data) {
+  return request({
+    url: '/book/searchBook',
+    method: 'post',
+    data
+  });
+}
+
+// 用户借阅图书提交到后端
+export function updateBorrowReturn(data) {
+  return request({
+    url: '/book/updateBorrowReturn',
+    method: 'post',
+    data
+  });
+}
+
+// 获取用户借阅记录(已经归还的)
+export function searchLentHistory(data) {
+  return request({
+    url: '/book/lentHistory',
+    method: 'post',
+    data
+  });
+}
+
+// 获取用户借阅记录(未归还的)
+export function searchUnReturnHistory(data) {
+  return request({
+    url: '/book/unReturnHistory',
+    method: 'post',
+    data
+  });
+}
+
+// 用户归还图书
+export function returnBook(data) {
+  return request({
+    url: '/book/returnBook',
+    method: 'post',
+    data
+  });
+}

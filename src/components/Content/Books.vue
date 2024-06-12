@@ -1,20 +1,24 @@
 <template>
   <div>
     <div class="card-form">
+
       <div class="search-row">
         <el-input v-model="name" placeholder="书名" class="search-input"></el-input>
         <el-input v-model="author" placeholder="作者" class="search-input"></el-input>
       </div>
+
       <div class="search-row">
         <el-select v-model="value" placeholder="请选择">
           <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
           </el-option>
         </el-select>
-        <el-button type="primary" round>搜索</el-button>
+        <el-button type="primary" round @click="searchBook">搜索</el-button>
         <el-button type="success" round @click="resert">重置</el-button>
         <el-button type="info" round>更多</el-button>
       </div>
+
     </div>
+
     <div class="card">
       <el-table :data="tableData">
         <el-table-column prop="id" label="图书编号" width="140">
@@ -31,7 +35,8 @@
         </el-table-column>
         <el-table-column label="操作" width="120">
           <template slot-scope="scope">
-            <el-button type="primary" size="small" @click="addBorrow(scope.row)">添加借阅</el-button>
+            <el-button v-if="!borrowedStatus[scope.row.id]" type="primary" size="small"
+              @click="addBorrow(scope.row)">添加借阅</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -39,7 +44,7 @@
   </div>
 </template>
 <script>
-  import { getBooks } from '@/api/api.js'
+  import { getBooks, searchBook } from '@/api/api.js'
   import { borrowedBooks } from '@/store/store.js'
   export default {
     name: 'Books',
@@ -53,8 +58,9 @@
         free: ''
       };
       return {
-        tableData: [],
-        borrowedBooks: [],
+        tableData: [],      // 当前图书列表
+        borrowedBooks: [],  // 借阅列表 要存入 Vuex
+        borrowedStatus: {}, // 借阅状态
         name: '',
         author: '',
         free: '',
@@ -89,12 +95,30 @@
           this.borrowedBooks.push(row);
           // 可以在这里或其他地方处理 borrowedBooks 数组，例如显示借阅列表或发送到服务器
           console.log('当前借阅的书籍:', this.borrowedBooks);
+          // 更新借阅状态
+          this.$set(this.borrowedStatus, row.id, true);
         } else {
           // 如果书籍已经被添加，可以在这里给出提示
           console.log('这本书已经添加到借阅列表中');
         }
         // 将借阅列表存入 Vuex
         this.$store.dispatch('SetBorrowedBooks', this.borrowedBooks);
+      },
+      // 按照条件搜索图书
+      searchBook() {
+        const searchData = {
+          name: this.name,
+          author: this.author,
+          free: this.free
+        };
+        searchBook(searchData).then(response => {
+          // 处理响应数据
+          console.log(response);
+          this.tableData = response;
+        }).catch(error => {
+          // 处理错误
+          console.error(error);
+        });
       }
     },
     mounted() {

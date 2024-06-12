@@ -16,6 +16,9 @@
           <el-menu-item index="2-2">
             <router-link to="/content/borrow">借阅信息</router-link>
           </el-menu-item>
+          <el-menu-item index="2-3">
+            精彩书评
+          </el-menu-item>
         </el-menu-item-group>
       </el-submenu>
       <el-submenu index="3">
