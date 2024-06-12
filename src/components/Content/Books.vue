@@ -12,7 +12,7 @@
         </el-select>
         <el-button type="primary" round>搜索</el-button>
         <el-button type="success" round @click="resert">重置</el-button>
-        <el-button type="info" round>更多</el-button>        
+        <el-button type="info" round>更多</el-button>
       </div>
     </div>
     <div class="card">
@@ -29,12 +29,18 @@
         </el-table-column>
         <el-table-column prop="free" label="库存余量">
         </el-table-column>
+        <el-table-column label="操作" width="120">
+          <template slot-scope="scope">
+            <el-button type="primary" size="small" @click="addBorrow(scope.row)">添加借阅</el-button>
+          </template>
+        </el-table-column>
       </el-table>
     </div>
   </div>
 </template>
 <script>
   import { getBooks } from '@/api/api.js'
+  import { borrowedBooks } from '@/store/store.js'
   export default {
     name: 'Books',
     data() {
@@ -47,9 +53,11 @@
         free: ''
       };
       return {
-        tableData: '',
+        tableData: [],
+        borrowedBooks: [],
         name: '',
         author: '',
+        free: '',
         options: [
           {
             value: '选项1',
@@ -63,13 +71,34 @@
       }
     },
     methods: {
+      // 重置搜索条件
       resert() {
         this.name = '';
         this.author = '';
         this.value = '';
+      },
+      // 添加借阅
+      addBorrow(row) {
+        //检测是否有库存
+        if (row.free === 0) {
+          alert('这本书没有库存');
+          return;
+        }
+        // 检查这本书是否已经被添加过，避免重复添加
+        if (!this.borrowedBooks.some(book => book.id === row.id)) {
+          this.borrowedBooks.push(row);
+          // 可以在这里或其他地方处理 borrowedBooks 数组，例如显示借阅列表或发送到服务器
+          console.log('当前借阅的书籍:', this.borrowedBooks);
+        } else {
+          // 如果书籍已经被添加，可以在这里给出提示
+          console.log('这本书已经添加到借阅列表中');
+        }
+        // 将借阅列表存入 Vuex
+        this.$store.dispatch('SetBorrowedBooks', this.borrowedBooks);
       }
     },
     mounted() {
+      // 获取图书列表
       getBooks().then(
         response => {
           console.log(response)
@@ -119,15 +148,19 @@
     /* 外边距 */
   }
 
-  .search-row, .select-row {
-  display: flex;
-  flex-wrap: wrap; /* 允许元素换行 */
-  align-items: center; /* 垂直居中对齐 */
-  gap: 10px; /* 元素之间的间隔 */
+  .search-row,
+  .select-row {
+    display: flex;
+    flex-wrap: wrap;
+    /* 允许元素换行 */
+    align-items: center;
+    /* 垂直居中对齐 */
+    gap: 10px;
+    /* 元素之间的间隔 */
   }
 
-.search-row {
-  margin-bottom: 10px; /* 与下一行的间隔 */
-}
-
+  .search-row {
+    margin-bottom: 10px;
+    /* 与下一行的间隔 */
+  }
 </style>

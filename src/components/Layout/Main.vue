@@ -1,6 +1,6 @@
 <template>
     <el-main>
-      <p>{{ userInfo.username }}</p>
+      <p>这是main的渲染{{ userInfo.username }}</p>
       <router-view></router-view>
     </el-main>
 </template>

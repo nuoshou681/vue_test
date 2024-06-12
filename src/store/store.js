@@ -12,18 +12,36 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
     
     state: {
-        userInfo: {}
+        userInfo: {},
+        borrowedBooks: [],
+        // 是否登录状态
+        isLoginedIn: false,
     },
     
     mutations: {
+        // 用户信息
         SetUserInfo(state, userInfo) {
             state.userInfo = userInfo;
+        },
+        // 借阅图书信息
+        SetBorrowedBooks(state, borrowedBooks) {
+            state.borrowedBooks = borrowedBooks;
+        },
+        // 登录状态
+        SetLoginStatus(state, isLoginedIn) {
+            state.isLoginedIn = isLoginedIn;
         }
     },
     
     actions: {
         SetUserInfo({commit}, userInfo) {
             commit('SetUserInfo', userInfo);
+        },
+        SetBorrowedBooks({commit}, borrowedBooks) {
+            commit('SetBorrowedBooks', borrowedBooks);
+        },
+        SetLoginStatus({commit}, isLoginedIn) {
+            commit('SetLoginStatus', isLoginedIn);
         }
     },
 });

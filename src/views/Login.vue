@@ -27,7 +27,8 @@
                 form: {
                     username: '',
                     password: '',
-                }
+                },
+                isLoginedIn: false
             }
         },
         methods: {
@@ -35,14 +36,17 @@
                 login(this.form).then(
                     reponse => {
                         console.log(reponse)
-                        // 登录成功后的逻辑
-                        if(reponse !== ''){
+                        if (reponse !== '') {
+                            // 登录成功后的逻辑
+                            this.isLoginedIn = true
                             // 表单数据加入vuex
-                            this.$store.dispatch('SetUserInfo',reponse)
+                            this.$store.dispatch('SetUserInfo', reponse)
+                            // 登录状态加入vuex
+                            this.$store.dispatch('SetLoginStatus', this.isLoginedIn)
                             // 跳转到content页面
                             this.$router.push('/content')
-                        }else{
-                            alert("登录失败")
+                        } else {
+                            alert("登录失败,账户或密码错误")
                         }
                     }
                 ).catch(
