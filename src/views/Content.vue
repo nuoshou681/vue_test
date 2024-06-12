@@ -10,9 +10,9 @@
   </div>
 </template>
 <script>
-  import Aside from '@/components/Layout/Aside'
-  import Main from '@/components/Layout/Main'
-  import Header from '@/components/Layout/Header'
+  import Aside from '@/views/Layout/Aside'
+  import Main from '@/views/Layout/Main'
+  import Header from '@/views/Layout/Header'
   export default {
     name: 'Content',
     components: {

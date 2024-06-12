@@ -2,9 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '../views/Login.vue'
 import Content from '../views/Content.vue'
-import Books from '@/components/Content/Books.vue'
-import Borrow from '@/components/Content/Borrow.vue'
-import Home from '@/components/Content/Home.vue'
+import Books from '@/views/Content/Books.vue'
+import Borrow from '@/views/Content/Borrow.vue'
+import Home from '@/views/Content/Home.vue'
 import store from '../store/store.js'
 
 Vue.use(Router)
