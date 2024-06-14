@@ -14,7 +14,6 @@
         </el-select>
         <el-button type="primary" round @click="searchBook">搜索</el-button>
         <el-button type="success" round @click="resert">重置</el-button>
-        <el-button type="info" round>更多</el-button>
       </div>
 
     </div>
@@ -66,14 +65,14 @@
         free: '',
         options: [
           {
-            value: '选项1',
+            value: 1,
             label: '还有库存'
           }, {
-            value: '选项2',
+            value: 0,
             label: '没有库存'
           }
         ],
-        value: ''
+        value: 1
       }
     },
     methods: {
@@ -81,7 +80,7 @@
       resert() {
         this.name = '';
         this.author = '';
-        this.value = '';
+        this.value = 1;
       },
       // 添加借阅
       addBorrow(row) {
@@ -106,12 +105,13 @@
       },
       // 按照条件搜索图书
       searchBook() {
-        const searchData = {
+        const data = {
           name: this.name,
           author: this.author,
-          free: this.free
+          free: this.value
         };
-        searchBook(searchData).then(response => {
+        console.log(data);
+        searchBook(data).then(response => {
           // 处理响应数据
           console.log(response);
           this.tableData = response;

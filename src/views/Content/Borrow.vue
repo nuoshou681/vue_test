@@ -149,18 +149,35 @@
       },
       // 归还书籍
       removeItem(index) {
-        const data = {
-          userId: this.$store.state.userInfo.id,
-          bookId: this.unReturnHistory[index].id
-        }
-        // 移除指定索引的元素
-        this.unReturnHistory.splice(index, 1);
-        // 调用API
-        returnBook(data).then(res => {
-          console.log(res)
-          // 查询用户的借阅记录
-          this.searchLentHistory();
-        })
+        this.$confirm('此操作将归还此书籍, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.$message({
+            type: 'success',
+            message: '归还成功!'
+          });
+          const data = {
+            userId: this.$store.state.userInfo.id,
+            bookId: this.unReturnHistory[index].id
+          }
+          // 移除指定索引的元素
+          this.unReturnHistory.splice(index, 1);
+          // 调用API
+          returnBook(data).then(res => {
+            console.log(res)
+            // 查询用户的借阅记录
+            this.searchLentHistory();
+          })
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消归还'
+          });
+          return;
+        });
+
       }
     },
     // 计算属性

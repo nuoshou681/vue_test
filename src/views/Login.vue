@@ -39,6 +39,10 @@
                         if (reponse !== '') {
                             // 登录成功后的逻辑
                             this.isLoginedIn = true
+                            this.$message({
+                                message: '登录成功',
+                                type: 'success'
+                            });
                             // 表单数据加入vuex
                             this.$store.dispatch('SetUserInfo', reponse)
                             // 登录状态加入vuex
@@ -46,7 +50,7 @@
                             // 跳转到content页面
                             this.$router.push('/content')
                         } else {
-                            alert("登录失败,账户或密码错误")
+                            this.$message.error('登录失败,请检查账号密码是否正确');
                         }
                     }
                 ).catch(

@@ -5,6 +5,9 @@ import Content from '../views/Content.vue'
 import Books from '@/views/Content/Books.vue'
 import Borrow from '@/views/Content/Borrow.vue'
 import Home from '@/views/Content/Home.vue'
+import Review from '@/views/Content/Review.vue'
+import Course from '@/views/Content/Course.vue'
+import Choose from '@/views/Content/Choose.vue'
 import store from '../store/store.js'
 
 Vue.use(Router)
@@ -40,6 +43,21 @@ const router = new Router({
                     path: '/content/borrow',
                     name: 'Borrow',
                     component: Borrow
+                },
+                {
+                    path: '/content/review',
+                    name: 'Review',
+                    component: Review
+                },
+                {
+                    path: '/content/course',
+                    name: 'Course',
+                    component: Course
+                },
+                {
+                    path: '/content/choose',
+                    name: 'Choose',
+                    component: Choose
                 }
             ]
         },

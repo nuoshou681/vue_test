@@ -70,3 +70,56 @@ export function returnBook(data) {
     data
   });
 }
+
+// 获取所有课程信息
+export function getAllCourse() {
+  return request({
+    url: '/course/getAllCourse',
+    method: 'get'
+  });
+}
+
+// 获取已选课程信息
+export function getSelectedCourse(data) {
+  return request({
+    url: '/course/getChoosedCourse',
+    method: 'post',
+    data
+  });
+}
+
+// 按照条件搜索课程
+export function searchCourse(data) {
+  return request({
+    url: '/course/searchCourse',
+    method: 'post',
+    data
+  });
+}
+
+// 用户选课
+export function chooseCourse(data) {
+  return request({
+    url: '/course/chooseCourse',
+    method: 'post',
+    data
+  });
+}
+
+// 用户退课
+export function returnCourse(data) {
+  return request({
+    url: '/course/returnCourse',
+    method: 'post',
+    data
+  });
+}
+
+// 获取书评信息
+export function getAllReview(data) {
+  return request({
+    url: '/review/getAllReview',
+    method: 'post',
+    data
+  });
+}

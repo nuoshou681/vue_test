@@ -12,11 +12,14 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
     
     state: {
+        // 用户信息
         userInfo: {},
         // 借阅图书信息
         borrowedBooks: [],
         // 是否登录状态
         isLoginedIn: false,
+        // 选课信息
+        choosedCourses: [],
     },
     
     mutations: {
@@ -36,6 +39,10 @@ const store = new Vuex.Store({
         SetLoginStatus(state, isLoginedIn) {
             state.isLoginedIn = isLoginedIn;
         },
+        // 选课信息
+        SetChoosedCourses(state, choosedCourses) {
+            state.choosedCourses = choosedCourses;
+        },
         
     },
     
@@ -51,6 +58,9 @@ const store = new Vuex.Store({
         },
         ClearBorrowedBooks({commit}) {
             commit('ClearBorrowedBooks');
+        },
+        SetChoosedCourses({commit}, choosedCourses) {
+            commit('SetChoosedCourses', choosedCourses);
         },
     },
 });
