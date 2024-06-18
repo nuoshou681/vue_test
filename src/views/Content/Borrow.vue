@@ -91,6 +91,14 @@
         unReturnHistory: []
       }
     },
+    watch:{
+      activeIndex(newVal, oldVal){
+        if (newVal == '3') {
+          // 查询用户未归还的书籍
+          this.searchUnReturnHistory();
+        }
+      }
+    },
     // 钩子函数
     mounted() {
       // 查询用户的借阅记录

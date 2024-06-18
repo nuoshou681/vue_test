@@ -28,6 +28,9 @@
           this.$store.dispatch('SetLoginStatus', false)
           this.$router.push('/login')
         }else{
+          if( this.$router.currentRoute.path === '/content/home' ){
+            return;
+          }
           this.$router.push('/content/home')
         }
       }

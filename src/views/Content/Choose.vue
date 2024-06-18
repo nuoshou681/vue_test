@@ -25,56 +25,67 @@
     </div>
 </template>
 <script>
-    import { choosedCourses } from '@/store/store.js'
-    import { chooseCourse,returnCourse } from '@/api/api.js'
+    import { chooseCourse,getSelectedCourse,returnCourse } from '@/api/api.js'
     export default {
         name: 'Choose',
         data() {
             return {
-                // 选课信息
+                // 所有已经选课的课程信息
                 Courses: [],
-                CoursesStatus: {}
+                // 本次等待选择的课程信息
+                waitCourses: [],
             }
         },
         methods: {
-            // 选择课程
             chooseCourse() {
-                // 调用API
-                const userid = this.$store.state.userInfo.id;
-                const data = this.choosedCourses.map(item => {
+                if (this.waitCourses.length === 0) {
+                    this.getSelectedCourse()
+                    console.log(this.Courses)
+                    return;
+                }
+                const data = this.waitCourses.map(item => {
                     return {
-                        userId: userid,
-                        courseId: item.id,
+                        userId: this.$store.state.userInfo.id,
+                        courseId: item.id
                     }
-                })
-                // 调用API 选择课程
-                chooseCourse(data).then(res => {
-                    console.log('该用户已经选择的课程信息')
+                });
+                chooseCourse(data).then(res=>{
                     console.log(res)
+                    this.getSelectedCourse()
                 })
             },
-            // 退课
+            // 获取当前用户已经选过的所有课程
+            getSelectedCourse() {
+                const data = {
+                    id: this.$store.state.userInfo.id
+                }
+                getSelectedCourse(data).then(res=>{
+                    console.log(res)
+                    this.Courses = res
+                })
+            },
             dropCourse(course) {
-                this.Courses = this.Courses.filter(item => item.id !== course.id);
-                this.$store.dispatch('SetChoosedCourses', this.Courses)
-                // 调用API 退课
+                // 将本条记录从Course数组去除,不在渲染
+                this.Courses = this.Courses.filter(item => item.id !== course.id)
+                // 向后端发送请求,删除该课程
                 const data = {
                     userId: this.$store.state.userInfo.id,
                     courseId: course.id
                 }
-                console.log(data)
-                returnCourse(course).then(res => {
-                    console.log('退课成功')
+                returnCourse(data).then(res=>{
+                    console.log(res)
                 })
             }
         },
         mounted() {
-            this.Courses = this.$store.state.choosedCourses
+            // 本次等待选择的课程信息
+            this.waitCourses = this.$store.state.choosedCourses;
+            // 选课
+            this.chooseCourse();
+            // 清空本次等待选择的课程信息
+            this.$store.dispatch('SetChoosedCourses',[]);
         },
         computed: {
-            choosedCourses() {
-                return this.$store.state.choosedCourses
-            }
         }
     }
 </script>

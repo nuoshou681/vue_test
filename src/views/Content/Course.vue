@@ -26,16 +26,17 @@
                     </el-table-column>
                     <el-table-column label="操作" width="120">
                         <template slot-scope="scope">
-                          <el-button v-if="!choosedStatus[scope.row.id]" type="primary" size="small" @click="addChoosedCourse(scope.row)">添加选课</el-button>
+                            <el-button v-if="!choosedStatus[scope.row.id]" type="primary" size="small"
+                                @click="addChoosedCourse(scope.row)">添加选课</el-button>
                         </template>
-                      </el-table-column>
+                    </el-table-column>
                 </el-table>
             </div>
         </div>
     </div>
 </template>
 <script>
-    import { getAllCourse, searchCourse,getSelectedCourse } from '@/api/api.js'
+    import { getAllCourse, searchCourse, getSelectedCourse } from '@/api/api.js'
     export default {
         name: 'Course',
         data() {
@@ -69,9 +70,18 @@
         },
         mounted() {
             // 查询课程信息
-            getAllCourse().then(res => {
-                console.log(res)
-                this.courseInform = res
+            getAllCourse().then(allCourses => {
+                const data = {
+                    id: this.$store.state.userInfo.id
+                }
+                getSelectedCourse(data).then(selectedCourses => {
+                    // 假设每个课程对象都有一个唯一的id属性
+                    const selectedIds = selectedCourses.map(course => course.id);
+                    // 过滤掉已选择的课程
+                    const filteredCourses = allCourses.filter(course => !selectedIds.includes(course.id));
+                    // 更新课程信息
+                    this.courseInform = filteredCourses;
+                })
             })
         },
         methods: {
@@ -79,9 +89,18 @@
             searchCourse() {
                 // 所有课程信息
                 if (this.value === 'all') {
-                    getAllCourse().then(res => {
-                        console.log(res)
-                        this.courseInform = res
+                    getAllCourse().then(allCourses => {
+                        const data = {
+                            id: this.$store.state.userInfo.id
+                        }
+                        getSelectedCourse(data).then(selectedCourses => {
+                            // 假设每个课程对象都有一个唯一的id属性
+                            const selectedIds = selectedCourses.map(course => course.id);
+                            // 过滤掉已选择的课程
+                            const filteredCourses = allCourses.filter(course => !selectedIds.includes(course.id));
+                            // 更新课程信息
+                            this.courseInform = filteredCourses;
+                        })
                     })
                     return;
                 }
